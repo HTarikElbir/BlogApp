@@ -9,7 +9,7 @@ builder.Services.AddDbContext<BlogContext>(options =>
 
 var app = builder.Build();
 
-
+SeedData.TestData(app);
 
 app.MapGet("/", () => "Hello World!");
 
