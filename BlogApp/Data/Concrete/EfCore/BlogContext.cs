@@ -7,6 +7,7 @@ namespace BlogApp.Data.Concrete.EfCore
     {
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
+
         }
 
         public DbSet<Post> Posts => Set<Post>();
