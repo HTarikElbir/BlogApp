@@ -5,6 +5,7 @@ namespace BlogApp.Data.Concrete.EfCore
 {
     public class SeedData
     {
+        // Method to seed the database with some test data
         public static void TestData(IApplicationBuilder app)
         {
             // Get the BlogContext from the application services
