@@ -366,3 +366,6 @@ FodyWeavers.xsd
 *.db-shm
 *.db-wal
 *.sqlite
+
+/wwwroot/lib
+/wwwroot
