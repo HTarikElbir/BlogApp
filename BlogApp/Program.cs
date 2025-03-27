@@ -14,6 +14,7 @@ options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")
 
 var app = builder.Build();
 
+app.UseStaticFiles();
 // Seed the database with some test data
 SeedData.TestData(app);
 
