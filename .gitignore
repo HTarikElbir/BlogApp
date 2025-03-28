@@ -368,4 +368,5 @@ FodyWeavers.xsd
 *.sqlite
 
 /wwwroot/lib
-/wwwroot
+node_modules/
+bootstrap-icons/
