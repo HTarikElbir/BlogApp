@@ -38,8 +38,8 @@ namespace BlogApp.Data.Concrete.EfCore
                 {
                     // Add some users to the database
                     context.Users.AddRange( 
-                        new User { UserName = "lebronjames"},
-                        new User { UserName = "kobebryant" }
+                        new User { UserName = "lebronjames", Image = "p1.jpg"},
+                        new User { UserName = "kobebryant", Image = "p2.jpg" }
                     );
                     // Save the changes
                     context.SaveChanges();
@@ -58,7 +58,10 @@ namespace BlogApp.Data.Concrete.EfCore
                             Tags = context.Tags.Take(3).ToList(),
                             Image = "1.jpg",
                             Url = "aspnet-core",
-                            UserId = 1
+                            UserId = 1,
+                            Comments = new List<Comment> { 
+                                new Comment { Text= "Good", PublisedOn = new DateTime(), UserId = 1 },
+                                new Comment { Text= "Awesome", PublisedOn = new DateTime(), UserId = 2 }}
                         },
                         new Post
                         {

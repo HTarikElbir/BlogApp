@@ -1,6 +1,9 @@
 using BlogApp.Data.Abstract;
 using BlogApp.Data.Concrete.EfCore;
+using BlogApp.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +27,6 @@ app.UseStaticFiles();
 // Seed the database with some test data
 SeedData.TestData(app);
 
-app.MapDefaultControllerRoute();
 
 app.MapControllerRoute(
     name: "posts_details",
@@ -40,7 +42,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller = Home}/{action = Index}/{id?}"
+    pattern: "{controller=Post}/{action=Index}/{id?}"
 );
 
 
