@@ -27,9 +27,15 @@ SeedData.TestData(app);
 app.MapDefaultControllerRoute();
 
 app.MapControllerRoute(
-    name: "post",
-    pattern: "post/{url}",
+    name: "posts_details",
+    pattern: "posts/{url}",
     defaults: new { controller = "Post", action = "Details" }
+);
+
+app.MapControllerRoute(
+    name: "posts_by_tag",
+    pattern: "posts/tag/{tag}",
+    defaults: new { controller = "Post", action = "Index" }
 );
 
 app.MapControllerRoute(
