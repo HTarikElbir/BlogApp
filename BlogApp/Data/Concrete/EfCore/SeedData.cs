@@ -24,11 +24,11 @@ namespace BlogApp.Data.Concrete.EfCore
                 {
                     // Add some tags to the database
                     context.Tags.AddRange(
-                        new Tag { Text = "Web Programming" },
-                        new Tag { Text = "Backend" },
-                        new Tag { Text = "Frontend" },
-                        new Tag { Text = "Fullstack" },
-                        new Tag { Text = "Mobile" }
+                        new Tag { Text = "Web Programming", Url="web-programming" },
+                        new Tag { Text = "Backend", Url = "backend" },
+                        new Tag { Text = "Frontend", Url = "frontend" },
+                        new Tag { Text = "Fullstack",Url = "fullstack" },
+                        new Tag { Text = "Mobile", Url="mobile" }
                         );
                     // Save the changes
                     context.SaveChanges();
@@ -57,6 +57,7 @@ namespace BlogApp.Data.Concrete.EfCore
                             PublishedOn = DateTime.Now.AddDays(-10),
                             Tags = context.Tags.Take(3).ToList(),
                             Image = "1.jpg",
+                            Url = "aspnet-core",
                             UserId = 1
                         },
                         new Post
@@ -67,6 +68,7 @@ namespace BlogApp.Data.Concrete.EfCore
                             PublishedOn = DateTime.Now.AddDays(-5),
                             Tags = context.Tags.Skip(2).Take(2).ToList(),
                             Image = "2.jpg",
+                            Url = "angular",
                             UserId = 2
                         },
                         new Post
@@ -77,6 +79,29 @@ namespace BlogApp.Data.Concrete.EfCore
                             PublishedOn = DateTime.Now.AddDays(-3),
                             Tags = context.Tags.Skip(1).Take(2).ToList(),
                             Image = "3.jpg",
+                            Url = "react",
+                            UserId = 1
+                        },
+                        new Post
+                        {
+                            Title = "Vue",
+                            Content = "Vue Content",
+                            IsActive = true,
+                            PublishedOn = DateTime.Now.AddDays(-1),
+                            Tags = context.Tags.Skip(1).Take(2).ToList(),
+                            Image = "2.jpg",
+                            Url = "vue",
+                            UserId = 2
+                        },
+                        new Post
+                        {
+                            Title = "Xamarin",
+                            Content = "Xamarin Content",
+                            IsActive = true,
+                            PublishedOn = DateTime.Now.AddDays(-1),
+                            Tags = context.Tags.Skip(4).Take(1).ToList(),
+                            Image = "1.jpg",
+                            Url = "xamarin",
                             UserId = 1
                         }
                     );
