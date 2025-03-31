@@ -24,11 +24,11 @@ namespace BlogApp.Data.Concrete.EfCore
                 {
                     // Add some tags to the database
                     context.Tags.AddRange(
-                        new Tag { Text = "Web Programming", Url="web-programming" },
-                        new Tag { Text = "Backend", Url = "backend" },
-                        new Tag { Text = "Frontend", Url = "frontend" },
-                        new Tag { Text = "Fullstack",Url = "fullstack" },
-                        new Tag { Text = "Mobile", Url="mobile" }
+                        new Tag { Text = "Web Programming", Url="web-programming", Colour = TagColour.success},
+                        new Tag { Text = "Backend", Url = "backend", Colour = TagColour.danger },
+                        new Tag { Text = "Frontend", Url = "frontend", Colour = TagColour.secondary },
+                        new Tag { Text = "Fullstack",Url = "fullstack", Colour = TagColour.dark },
+                        new Tag { Text = "Mobile", Url="mobile", Colour = TagColour.light}
                         );
                     // Save the changes
                     context.SaveChanges();
