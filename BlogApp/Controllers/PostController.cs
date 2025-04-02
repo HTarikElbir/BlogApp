@@ -43,5 +43,11 @@ namespace BlogApp.Controllers
             }
             return View(post);
         }
+
+        public IActionResult AddComment(int PostId, string UserName, string Text)
+        {
+            return View();
+        } 
     }
+
 }
