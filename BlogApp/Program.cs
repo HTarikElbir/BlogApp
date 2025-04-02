@@ -11,9 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
+// Dependency Injection
 builder.Services.AddScoped<IPostRepository, EfPostRepository>();
 builder.Services.AddScoped<ITagRepository, EfTagRepository>();
+builder.Services.AddScoped<ICommentRepository, EfCommentRepository>();
 
 // Add services to the container.
 builder.Services.AddDbContext<BlogContext>(options =>
@@ -24,10 +25,11 @@ var app = builder.Build();
 
 // Use static files
 app.UseStaticFiles();
+
 // Seed the database with some test data
 SeedData.TestData(app);
 
-
+// Add routes to the application
 app.MapControllerRoute(
     name: "posts_details",
     pattern: "posts/details/{url}",
