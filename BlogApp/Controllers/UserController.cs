@@ -1,4 +1,5 @@
 ﻿using BlogApp.Data.Abstract;
+using BlogApp.Entities;
 using BlogApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -35,9 +36,8 @@ namespace BlogApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
-          
             return View();
         }
        
@@ -93,11 +93,32 @@ namespace BlogApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid) 
             {
-                return RedirectToAction("Login");
+                // Check if the email already exists in the database
+                var isUser = await _userRepository.Users.FirstOrDefaultAsync(u => u.UserName == model.UserName || u.Email == model.Email);
+                if (isUser == null) 
+                {
+                    // If the email does not exist, create a new user
+                    _userRepository.AddUser(new User
+                    {
+                        UserName = model.UserName,
+                        Name = model.Name,
+                        Email = model.Email,
+                        Password = model.Password,
+                        Image = "avatar.png"
+                    });
+                    // Save changes to the database
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    // If the email already exists, add a model error
+                    ModelState.AddModelError("", "This email or username already exists.");
+                }
+    
             }
             return View(model);
         }
