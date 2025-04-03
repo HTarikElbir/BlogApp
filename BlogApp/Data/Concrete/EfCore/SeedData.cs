@@ -38,8 +38,8 @@ namespace BlogApp.Data.Concrete.EfCore
                 {
                     // Add some users to the database
                     context.Users.AddRange( 
-                        new User { UserName = "lebronjames", Image = "p1.jpg"},
-                        new User { UserName = "kobebryant", Image = "p2.jpg" }
+                        new User { UserName = "lebronjames", Name = "Lebron", Email = "info@lebronjames.com", Password = "123456",Image = "p1.jpg"},
+                        new User { UserName = "kobebryant", Name = "Kobe", Email = "info@kobe.com", Password = "123456" ,Image = "p2.jpg" }
                     );
                     // Save the changes
                     context.SaveChanges();
