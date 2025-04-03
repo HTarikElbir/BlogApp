@@ -23,6 +23,7 @@ namespace BlogApp.Controllers
         //  Display the list of posts
         public async Task<IActionResult> Index(string tag)
         {
+            var claims = User.Claims;
             //  Get the list of posts
             var posts = _postRepository.Posts;
 

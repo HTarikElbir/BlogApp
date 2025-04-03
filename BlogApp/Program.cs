@@ -1,6 +1,7 @@
 using BlogApp.Data.Abstract;
 using BlogApp.Data.Concrete.EfCore;
 using BlogApp.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,16 +16,27 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IPostRepository, EfPostRepository>();
 builder.Services.AddScoped<ITagRepository, EfTagRepository>();
 builder.Services.AddScoped<ICommentRepository, EfCommentRepository>();
+builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 
 // Add services to the container.
 builder.Services.AddDbContext<BlogContext>(options =>
 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+// Configure authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
 var app = builder.Build();
 
 // Use static files
 app.UseStaticFiles();
+
+// Use routing
+app.UseRouting();
+
+// Use authentication and authorization
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Seed the database with some test data
 SeedData.TestData(app);
@@ -32,19 +44,19 @@ SeedData.TestData(app);
 // Add routes to the application
 app.MapControllerRoute(
     name: "posts_details",
-    pattern: "posts/details/{url}",
+    pattern: "post/details/{url}",
     defaults: new { controller = "Post", action = "Details" }
 );
 
 app.MapControllerRoute(
     name: "posts_by_tag",
-    pattern: "posts/tag/{tag}",
+    pattern: "post/tag/{tag}",
     defaults: new { controller = "Post", action = "Index" }
 );
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Post}/{action=Index}/{id?}"
+    pattern: "{controller=User}/{action=Login}/{id?}"
 );
 
 
