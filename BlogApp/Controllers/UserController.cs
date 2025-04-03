@@ -19,8 +19,21 @@ namespace BlogApp.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            if(User.Identity!.IsAuthenticated)
+            {
+                // If the user is already authenticated, redirect to the index page
+                return RedirectToAction("Index", "Post");
+            }
             return View();
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            // Sign out the user
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login");
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -70,6 +83,8 @@ namespace BlogApp.Controllers
            
             return View(model);
         }
+
+
 
     }
 
