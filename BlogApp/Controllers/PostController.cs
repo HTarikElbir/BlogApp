@@ -56,7 +56,8 @@ namespace BlogApp.Controllers
             return View(post);
         }
         //  Add comment to the database
-        public IActionResult AddComment(int PostId, string UserName, string Text, string Url)
+        [HttpPost]
+        public JsonResult AddComment(int PostId, string UserName, string Text, string Url)
         {
             var entity = new Comment
             {
@@ -68,8 +69,13 @@ namespace BlogApp.Controllers
             _commentRepository.AddComment(entity);
 
             // Redirect to the post details page
-            //return Redirect("/posts/details/" + Url);
-            return RedirectToRoute("posts_details", new { url = Url});
+            return Json(new
+            {
+                UserName,
+                Text,
+                entity.PublisedOn,
+                entity.User.Image
+            });
         } 
     }
 
