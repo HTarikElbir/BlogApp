@@ -5,6 +5,7 @@ using BlogApp.Models;
 using BlogApp.ViewComponents;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BlogApp.Controllers
 {
@@ -23,7 +24,6 @@ namespace BlogApp.Controllers
         //  Display the list of posts
         public async Task<IActionResult> Index(string tag)
         {
-            var claims = User.Claims;
             //  Get the list of posts
             var posts = _postRepository.Posts;
 
@@ -60,22 +60,26 @@ namespace BlogApp.Controllers
         [HttpPost]
         public JsonResult AddComment(int PostId, string UserName, string Text, string Url)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var username = User.FindFirstValue(ClaimTypes.Name);
+            var avatar = User.FindFirstValue(ClaimTypes.UserData);
+
             var entity = new Comment
             {
                 PostId = PostId,
-                PublisedOn = DateTime.Now,
                 Text = Text,
-                User = new User { UserName = UserName, Image="avatar.jpg" }
+                PublisedOn = DateTime.Now,
+                UserId = int.Parse(userId ?? "")
             };
             _commentRepository.AddComment(entity);
 
             // Redirect to the post details page
             return Json(new
             {
-                UserName,
+                username,
                 Text,
                 entity.PublisedOn,
-                entity.User.Image
+                avatar
             });
         } 
     }

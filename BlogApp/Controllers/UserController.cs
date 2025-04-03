@@ -51,6 +51,7 @@ namespace BlogApp.Controllers
                     userClaims.Add(new Claim(ClaimTypes.NameIdentifier, isUser.UserId.ToString()));
                     userClaims.Add(new Claim(ClaimTypes.Name, isUser.UserName ?? ""));
                     userClaims.Add(new Claim(ClaimTypes.GivenName, isUser.Name ?? ""));
+                    userClaims.Add(new Claim(ClaimTypes.UserData, isUser.Image ?? ""));
 
                     // Add role claim if the user is an admin
                     if (isUser.Email == "info@lebronjames.com")
