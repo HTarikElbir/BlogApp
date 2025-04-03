@@ -34,6 +34,13 @@ namespace BlogApp.Controllers
             return RedirectToAction("Login");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Register()
+        {
+          
+            return View();
+        }
+       
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -85,8 +92,20 @@ namespace BlogApp.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid) 
+            {
+                return RedirectToAction("Login");
+            }
+            return View(model);
+        }
+
 
 
     }
+
+
 
 }
