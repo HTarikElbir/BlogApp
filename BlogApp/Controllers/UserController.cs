@@ -123,6 +123,30 @@ namespace BlogApp.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Profile(string username)
+        {
+            // Check if the username is null or empty
+            if (string.IsNullOrEmpty(username))
+            {
+                return NotFound();
+            }
+            // Get the user by username
+            var user = _userRepository
+                .Users
+                .Include(u => u.Posts)
+                .Include(u => u.Comments)
+                .ThenInclude(c => c.Post)
+                .FirstOrDefault(u => u.UserName == username);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            
+            return View(user);
+        }
+
 
 
     }

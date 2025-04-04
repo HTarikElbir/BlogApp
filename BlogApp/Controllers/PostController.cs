@@ -45,6 +45,7 @@ namespace BlogApp.Controllers
             //  Include the tags and comments in the post
             var post = await _postRepository
                 .Posts
+                .Include(p => p.User)
                 .Include(p => p.Tags)
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.User)
