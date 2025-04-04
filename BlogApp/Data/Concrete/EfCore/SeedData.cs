@@ -52,6 +52,7 @@ namespace BlogApp.Data.Concrete.EfCore
                         new Post
                         {
                             Title = "ASP.NET Core",
+                            Description = "ASP.NET Core Description",
                             Content = "ASP.NET Core Content",
                             IsActive = true,
                             PublishedOn = DateTime.Now.AddDays(-10),
@@ -66,6 +67,7 @@ namespace BlogApp.Data.Concrete.EfCore
                         new Post
                         {
                             Title = "Angular",
+                            Description = "Angular Description",
                             Content = "Angular Content",
                             IsActive = true,
                             PublishedOn = DateTime.Now.AddDays(-5),
@@ -77,6 +79,7 @@ namespace BlogApp.Data.Concrete.EfCore
                         new Post
                         {
                             Title = "React",
+                            Description = "React Description",
                             Content = "React Content",
                             IsActive = true,
                             PublishedOn = DateTime.Now.AddDays(-3),
@@ -88,6 +91,7 @@ namespace BlogApp.Data.Concrete.EfCore
                         new Post
                         {
                             Title = "Vue",
+                            Description = "Vue Description",
                             Content = "Vue Content",
                             IsActive = true,
                             PublishedOn = DateTime.Now.AddDays(-1),
@@ -99,6 +103,7 @@ namespace BlogApp.Data.Concrete.EfCore
                         new Post
                         {
                             Title = "Xamarin",
+                            Description = "Xamarin Description",
                             Content = "Xamarin Content",
                             IsActive = true,
                             PublishedOn = DateTime.Now.AddDays(-1),

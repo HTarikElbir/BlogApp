@@ -81,7 +81,36 @@ namespace BlogApp.Controllers
                 entity.PublisedOn,
                 avatar
             });
-        } 
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(PostAddViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                //  Create a new post and add it to the database
+                var post = new Post
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    Content = model.Content,
+                    Url = model.Url,
+                    UserId = int.Parse(userId ?? ""),
+                    PublishedOn = DateTime.Now,
+                    Image = "1.jpg",
+                    IsActive = false
+                };
+                _postRepository.Create(post);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
     }
 
 }
