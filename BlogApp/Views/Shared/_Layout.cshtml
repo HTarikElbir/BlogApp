@@ -19,6 +19,9 @@
                 @if (User.Identity!.IsAuthenticated)
                 {
                     <li class="nav-item">
+                        <a href="/post/list" class="nav-link">Posts</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link">@User.Identity.Name</a>
                     </li>
                     <li class="nav-item">

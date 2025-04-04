@@ -24,7 +24,11 @@ options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")
 );
 
 // Configure authentication
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.LoginPath = "/User/Login"; 
+});
+
 
 var app = builder.Build();
 
