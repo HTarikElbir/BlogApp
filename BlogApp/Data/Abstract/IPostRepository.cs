@@ -7,5 +7,6 @@ namespace BlogApp.Data.Abstract
         IQueryable<Post> Posts { get; }
         void Create(Post post);
 
+        void Edit(Post post);
     }
 }

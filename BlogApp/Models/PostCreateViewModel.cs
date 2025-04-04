@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlogApp.Models
 {
-    public class PostAddViewModel
+    public class PostCreateViewModel
     {
+        public int PostId { get; set; }
+
         [Required(ErrorMessage = "Title is required")]
         [Display(Name = "Title")]
         public string? Title { get; set; }
@@ -20,6 +22,8 @@ namespace BlogApp.Models
         [Required(ErrorMessage = "Url are required")]
         [Display(Name = "Url")]
         public string? Url { get; set; }
+
+        public bool IsActive { get; set; }
 
 
     }

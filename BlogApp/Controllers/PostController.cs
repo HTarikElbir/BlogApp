@@ -26,7 +26,7 @@ namespace BlogApp.Controllers
         public async Task<IActionResult> Index(string tag)
         {
             //  Get the list of posts
-            var posts = _postRepository.Posts;
+            var posts = _postRepository.Posts.Where(p => p.IsActive);
 
             //  If the tag is not empty, filter the posts by tag
             if (!string.IsNullOrEmpty(tag))
@@ -94,7 +94,7 @@ namespace BlogApp.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Create(PostAddViewModel model)
+        public IActionResult Create(PostCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -133,6 +133,58 @@ namespace BlogApp.Controllers
             return View(await posts.ToListAsync());
         }
 
+        [Authorize]
+        public IActionResult Edit(int? id)
+        {
+            if(id== null)
+            {
+                return NotFound();
+            }
+
+            var post = _postRepository.Posts.FirstOrDefault(p => p.PostId == id);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(new PostCreateViewModel
+            {
+                PostId = post.PostId,
+                Title = post.Title,
+                Description = post.Description,
+                Content = post.Content,
+                Url = post.Url,
+                IsActive = post.IsActive,
+            });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(PostCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var entityUpdate = new Post
+                {
+                    PostId = model.PostId,
+                    Title = model.Title,
+                    Description = model.Description,
+                    Content = model.Content,
+                    Url = model.Url,
+                };
+                if (User.FindFirstValue(ClaimTypes.Role) == "admin")
+                {
+                    entityUpdate.IsActive = model.IsActive;
+                }
+
+                _postRepository.Edit(entityUpdate);
+                return RedirectToAction("List");
+            }
+
+           
+            return View(model);
+        }
     }
 
 }
