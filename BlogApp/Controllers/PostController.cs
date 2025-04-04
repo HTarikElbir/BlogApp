@@ -169,7 +169,7 @@ namespace BlogApp.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult Edit(PostCreateViewModel model)
+        public IActionResult Edit(PostCreateViewModel model, int[] tagIds)
         {
             if (ModelState.IsValid)
             {
@@ -189,8 +189,7 @@ namespace BlogApp.Controllers
                 _postRepository.Edit(entityUpdate);
                 return RedirectToAction("List");
             }
-
-           
+            ViewBag.Tags = _tagRepository.Tags.ToList();
             return View(model);
         }
     }

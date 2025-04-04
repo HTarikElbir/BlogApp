@@ -8,5 +8,6 @@ namespace BlogApp.Data.Abstract
         void Create(Post post);
 
         void Edit(Post post);
+        void Edit(Post post, int[] tagIds);
     }
 }
