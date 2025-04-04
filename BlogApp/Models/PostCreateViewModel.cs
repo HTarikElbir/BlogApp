@@ -25,6 +25,7 @@ namespace BlogApp.Models
 
         public bool IsActive { get; set; }
 
+        public List<Tag> Tags { get; set; } = new List<Tag>();
 
     }
 }
